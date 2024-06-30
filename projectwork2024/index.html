@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form action="http://127.0.0.1:5000/worksiteStatusByYear" method="get">
+      <input type="submit" value="GET request" />
+    </form>
+    <form action="http://127.0.0.1:5000/worksiteStatusByYear" method="post">
+      <input type="text" name="post" id="post" />
+      <input type="submit" value="POST request" />
+    </form>
+    <button onclick="primoEndpointGet()">primoEndpointGet</button>
+    <button onclick="primoEndpointPost()">primoEndpointPost</button>
+    <br /><br />
+    <button onclick="secondoEndpoint()">secondoEndpoint</button>
+    <br /><br />
+    <button onclick="terzoEndpoint()">terzoEndpoint</button>
+    <br /><br />
+    <button onclick="quartoEndpoint()">quartoEndpoint</button>
+    <script>
+      async function primoEndpointGet() {
+        try {
+          let fetchRes = await fetch(
+            "http://127.0.0.1:5000/worksiteStatusByYear"
+          );
+
+          if (!fetchRes.ok) {
+            throw new Error("Network response was not ok");
+          }
+
+          let data = await fetchRes.json();
+          console.log(data);
+        } catch (error) {
+          console.error("Error fetching data:", error);
+        }
+      }
+
+      async function primoEndpointPost() {
+        try {
+          let fetchRes = await fetch(
+            "http://127.0.0.1:5000/worksiteStatusByYear",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json; charset=UTF-8",
+              },
+              body: JSON.stringify({ year: "2019" }),
+            }
+          );
+
+          if (!fetchRes.ok) {
+            throw new Error("Network response was not ok");
+          }
+
+          let data = await fetchRes.json();
+          console.log(data);
+        } catch (error) {
+          console.error("Error fetching data:", error);
+        }
+      }
+
+      async function secondoEndpoint() {
+        try {
+          let fetchRes = await fetch(
+            "http://127.0.0.1:5000/worksiteNumberByType",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json; charset=UTF-8",
+              },
+              body: JSON.stringify({ choice: "lavoriChiusi" }),
+            }
+          );
+
+          if (!fetchRes.ok) {
+            throw new Error("Network response was not ok");
+          }
+          let data = await fetchRes.json();
+          console.log(data);
+        } catch (error) {
+          console.error("Error fetching data:", error);
+        }
+      }
+
+      async function terzoEndpoint() {
+        try {
+          let fetchRes = await fetch("http://127.0.0.1:5000/incrementOverTime");
+
+          if (!fetchRes.ok) {
+            throw new Error("Network response was not ok");
+          }
+
+          let data = await fetchRes.json();
+          console.log(data);
+        } catch (error) {
+          console.error("Error fetching data:", error);
+        }
+      }
+
+      async function quartoEndpoint() {
+        try {
+          let fetchRes = await fetch(
+            "http://127.0.0.1:5000/worksiteNumberByRegionAndYear",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json; charset=UTF-8",
+              },
+              body: JSON.stringify({ region: "Lombardia", year: "2020" }),
+            }
+          );
+
+          if (!fetchRes.ok) {
+            throw new Error("Network response was not ok");
+          }
+
+          let data = await fetchRes.json();
+          console.log(data);
+        } catch (error) {
+          console.error("Error fetching data:", error);
+        }
+      }
+    </script>
+  </body>
+</html>
